@@ -1,0 +1,39 @@
+
+html {
+     font-family: verdana, sans-serif;
+
+}
+
+body {
+     margin: 1em;
+     margin-left: 4em;
+     color: #ffffff;
+     color: #000000;
+
+}
+
+
+.even {
+      background: #ffffff;
+}
+
+.odd {
+     background: #eeeeee;
+}
+
+th {
+   text-align: left;
+   background: #aaaaaa;
+}
+
+
+td.number, td.points {
+  padding-right: 0.7em;
+  text-align: right;
+}
+
+
+.error {
+  color: #FF0000;
+  font-weight: bold;
+}

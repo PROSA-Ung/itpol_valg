@@ -23,20 +23,31 @@ This application is quite insecure:
 
 How to use
 ==========
+Simply put all files in a directory on your web server.
+
 To configure the time keeper, edit the tidstager.html file: Replace the "Navn Navnsen" entries with the names of the different speakers.
 If you add or delete speaker rows, remember to change in "function all_bars()" accordingly.
 
-For the question application, start by creating a MySQL database. Run the create.sql script in mysql.
+For the question application, start by creating a MySQL database. Then run the create.sql script in mysql. To do this, run "mysql -u root -p" and give the following commands:
+``` sql
+create database my_database;
+create user 'my_user'@'localhost' identified by 'my_password';
+grant all privileges on my_database.* to my_user;
+use my_database;
+\. /path/to/create.sql
+```
 
 Edit the files ask.cgi, index.cgi, and moderate.cgi and edit the lines containing "DBI->connect" to include the correct connection details for your database.
 
 Edit the files index.cgi and moderate.cgi and set the moderator UIDs in the "%admins" section. You should choose some random UIDs for that.
-The moderator logs in by setting his UID to one of the UIDs in the %admin section in the browser.
+The moderator logs in by setting his UID to one of the UIDs in the %admin section in the browser, i.g. by opening http://server.name/path/to/va/?force_uid=1234 in his browser.
+
 
 You might need to add the lines
-
-   AddHandler cgi-script .cgi
-   Options +ExecCgi
+``` apache
+AddHandler cgi-script .cgi
+Options +ExecCgi
+```
 
 to your Apache configuration - either in a .htaccess file or in the Apache site configuration.
 

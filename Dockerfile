@@ -13,6 +13,7 @@ COPY ./config/conf.d/ /etc/nginx/conf.d/
 COPY ./config/entrypoint.sh /
 
 WORKDIR /var/www
+COPY ./app/ ./
 
 ENV DB_HOST=web_db
 ENV DB_NAME=valg

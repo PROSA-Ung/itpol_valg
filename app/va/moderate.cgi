@@ -2,7 +2,7 @@
 
 ####################################333
 # Election application
-# Written by Jørgen Elgaard Larsen
+# Written by JÃ¸rgen Elgaard Larsen
 # HTML and design by Ole Tange
 # Licensed under the GNU GPL version 3.
 
@@ -47,7 +47,7 @@ if ($isadmin){
 
     my $qid = int $q->param('qid');
 
-    my $dbh = DBI->connect('dbi:mysql:host=localhost;database=valg', 'valg', 'secret', {});
+    my $dbh = DBI->connect("dbi:mysql:host=$ENV{'DB_HOST'};database=$ENV{'DB_NAME'}", "$ENV{'DB_USER'}", "$ENV{'DB_PASS'}", {});
     
     unless ($dbh){
 	$page .= qq|<p class="error">No database connection</p>|;
@@ -61,7 +61,7 @@ if ($isadmin){
 	$dbh->do("DELETE FROM votes WHERE question = ? AND uid = ?", undef, $qid, $uid);
 	$dbh->do("INSERT INTO votes (question, uid, vote) VALUES (?,?,?)", undef, $qid, $uid, $q->param('point_adjust'));
 	
-	$page .= qq|<p class="good">Ændringer gemt</p>|;
+	$page .= qq|<p class="good">Ã¦ndringer gemt</p>|;
 
     }
 
@@ -100,7 +100,7 @@ if ($isadmin){
 	    <input type="hidden" name="template" value="${template}" />
 	    <input type="hidden" name="uid" value="${uid}" />
 
-	    <h2>Moderér spørgsmål:</h2>
+	    <h2>ModerÃ¦r SpÃ¸rgsmÃ¥l:</h2>
 	    <textarea cols="60" rows="7" name="moderated">$content</textarea>
 	    <br/>
 

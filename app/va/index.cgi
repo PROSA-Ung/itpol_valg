@@ -2,11 +2,11 @@
 
 ####################################333
 # Election application
-# Written by Jørgen Elgaard Larsen
+# Written by JÃ¸rgen Elgaard Larsen
 # HTML and design by Ole Tange
 # Licensed under the GNU GPL version 3.
 
-
+use utf8::all;
 
 use CGI;
 use DBI;
@@ -38,7 +38,7 @@ if (open SKAB, "<${template}.html"){
 my $page = '';
 my $header = '';
 
-my $dbh = DBI->connect('dbi:mysql:host=localhost;database=valg', 'valg', 'secret', {});
+my $dbh = DBI->connect("dbi:mysql:host=$ENV{'DB_HOST'};database=$ENV{'DB_NAME'}", "$ENV{'DB_USER'}", "$ENV{'DB_PASS'}", {});
 
 unless ($dbh){
     $page .= qq|<p class="error">No database connection</p>|;
@@ -148,7 +148,7 @@ if ($mode ne 'novote'){
     $page .= qq|<th class="number"><a href="index.cgi?$gparams&amp;sort=$numberoffer">Nummer</a></th>|;
 }
 $page .= qq|
-    <th class="question">Spørgsmål</th>
+    <th class="question">SpÃ¸rgsmÃ¥l</th>
     <th class="points"><a href="index.cgi?$gparams&amp;sort=$pointsoffer">Points</a></th>
     |;
 if ($mode ne 'novote'){
@@ -234,15 +234,15 @@ if ($sth){
 	}
 
 	if ($isadmin and $mode ne 'novote'){
-	    $page .= qq¤
+	    $page .= qq(
 		<td class="admincell">
 		  <a href="index.cgi?answer_question=$row->{id}&amp;${gparams}&amp;sort=$sort&amp;refresh=${refresh}"
-                     onclick="return(confirm('Er du sikker på, at du vil markere spørgsmål $row->{id} som besvaret?'))">Besvaret</a>
-		     | <a href="moderate.cgi?qid=$row->{id}&amp;${gparams}" target="_blank">Moderér</a>
+                     onclick="return(confirm('Er du sikker pÃ¥, at du vil markere SpÃ¸rgsmÃ¥l $row->{id} som besvaret?'))">Besvaret</a>
+		     | <a href="moderate.cgi?qid=$row->{id}&amp;${gparams}" target="_blank">ModerÃ¦r</a>
 		     | <a href="index.cgi?delete_question=$row->{id}&amp;${gparams}&amp;refresh=${refresh}&amp;sort=$sort"
-                     onclick="return(confirm('Er du sikker på, at du vil slette spørgsmål $row->{id} ?'))">Slet</a>
+                     onclick="return(confirm('Er du sikker pÃ¥, at du vil slette SpÃ¸rgsmÃ¥l $row->{id} ?'))">Slet</a>
 		</td>
-		¤;
+		);
 	}
 
 	$page .= qq|</tr>\n|;
@@ -268,7 +268,7 @@ $page .= qq|</table><br/>
 
 
 if ($mode ne 'novote'){
-    $page .= qq|<p><a href="ask.cgi?$uid=${uid}&amp;template=question" target="_blank" class="asklink">Stil nyt spørgsmål</a></p>|;
+    $page .= qq|<p><a href="ask.cgi?$uid=${uid}&amp;template=question" target="_blank" class="asklink">Stil nyt SpÃ¸rgsmÃ¥l</a></p>|;
 }
 
 $header .= qq|<script type="text/javascript" src="lib.js" ></script>\n|;
@@ -286,7 +286,7 @@ my $cookie = $q->cookie(-name=>'uid',
 			-domain=>'valg.itpol.dk',
 			-secure=>0);
 print $q->header(-type  => 'text/html',
-		 -charset => 'ISO-8859-1',       
+		 -charset => 'UTF-8',       
 		 -cookie=>$cookie);
 
 
@@ -294,7 +294,6 @@ $skab =~ s/<!--HEADER-->/$header/g;
 $skab =~ s/<!--CONTENT-->/$page/g;
 
 print $skab;
-
 
 
 exit;

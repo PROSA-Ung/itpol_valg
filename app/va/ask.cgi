@@ -2,7 +2,7 @@
 
 ####################################333
 # Election application
-# Written by Jørgen Elgaard Larsen
+# Written by JÃ¸rgen Elgaard Larsen
 # HTML and design by Ole Tange
 # Licensed under the GNU GPL version 3.
 
@@ -45,10 +45,10 @@ if (not $q->param('asked')){
 	<input type="hidden" name="asked" value="question" />
 	<input type="hidden" name="template" value="${template}" />
 	<input type="hidden" name="uid" value="${uid}" />
-	<h2>Stil spørgsmål:</h2>
+	<h2>Stil spÃ¸rgsmÃ¥l:</h2>
 	<textarea cols="60" rows="7" name="my_question"></textarea>
 	<br/>
-	<input type="submit" onclick="return(confirm('Er du sikker på, at du vil sende dette spørgsmål?'))" name="sendin" value="Afsend" />
+	<input type="submit" onclick="return(confirm('Er du sikker pÃ¥, at du vil sende dette spÃ¸rgsmÃ¥l?'))" name="sendin" value="Afsend" />
 	</form>
 	|;
 
@@ -65,7 +65,7 @@ if (not $q->param('asked')){
     $content =~ s/>/&gt;/g;
 
     if ($content){
-	my $dbh = DBI->connect('dbi:mysql:host=localhost;database=valg', 'valg', 'secret', {});
+	my $dbh = DBI->connect("dbi:mysql:host=$ENV{'DB_HOST'};database=$ENV{'DB_NAME'}", "$ENV{'DB_USER'}", "$ENV{'DB_PASS'}", {});
 	
 	unless ($dbh){
 	    $page .= qq|<p class="error">No database connection</p>|;
@@ -81,9 +81,9 @@ if (not $q->param('asked')){
 	    $sth->finish;
 	}
 	$dbh->do("INSERT INTO votes (question, uid, vote) VALUES (?, ?, 1)", undef, $qid, $uid);
-	$page .= qq|<p>Tak for dit spørgsmål. Det er nu registreret.</p>|;
+	$page .= qq|<p>Tak for dit spÃ¸rgsmÃ¥l. Det er nu registreret.</p>|;
     } else {
-	$page .= qq|<p class="error">Du skrev ikke noget i dit spørgsmål!</p>|;
+	$page .= qq|<p class="error">Du skrev ikke noget i dit spÃ¸rgsmÃ¥l!</p>|;
     }
 
 			  

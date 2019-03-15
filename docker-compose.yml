@@ -22,3 +22,4 @@ services:
       MYSQL_PASSWORD: secret
     volumes:
       - ./db:/docker-entrypoint-initdb.d:ro
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]

@@ -65,7 +65,7 @@ if (not $q->param('asked')){
     $content =~ s/>/&gt;/g;
 
     if ($content){
-	my $dbh = DBI->connect("dbi:mysql:host=$ENV{'DB_HOST'};database=$ENV{'DB_NAME'}", "$ENV{'DB_USER'}", "$ENV{'DB_PASS'}", {});
+	my $dbh = DBI->connect("dbi:mysql:host=$ENV{'DB_HOST'};database=$ENV{'DB_NAME'}", "$ENV{'DB_USER'}", "$ENV{'DB_PASS'}", {mysql_enable_utf8 => 1});
 	
 	unless ($dbh){
 	    $page .= qq|<p class="error">No database connection</p>|;

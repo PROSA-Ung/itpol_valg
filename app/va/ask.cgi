@@ -90,7 +90,7 @@ if (not $q->param('asked')){
 }
 
 
-$page .= qq|<p><a href="javascript:window.close()" class="close">Luk vinduet</a></p>|;
+$page .= qq|<p><a href="/va/" class="close">Gå tilbage til spørgsmålslisten</a></p>|;
 
 
 

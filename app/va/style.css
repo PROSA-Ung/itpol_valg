@@ -196,3 +196,9 @@ button, .asklink, .close, input[type=submit] {
     color: #ffffff;
     background-color: #3F8584;
 }
+
+button:hover, .asklink:hover, .close:hover, input[type=submit]:hover {
+  background: white;
+  /* border: 1px solid #3F8584; */
+  color: #3F8584;
+}

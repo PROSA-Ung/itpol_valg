@@ -1,11 +1,307 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
-   "http://www.w3.org/TR/html4/frameset.dtd">
-<HTML>
-<HEAD>
-<TITLE>Valgm�de</TITLE>
-</HEAD>
-  <FRAMESET rows="30%, 70%">
-      <FRAME src="tidstager.html">
-      <FRAME src="va/?mode=novote&refresh=30&template=clean">
-  </FRAMESET>
-</HTML>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="va/style.css" />
+    <!--
+Copyright Ole Tange 2013.
+This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.
+
+This work is also licensed under GPLv3.
+-->
+</head>
+
+<body class="time">
+
+    <script type="text/javascript">
+
+        function debug(res) {
+            var felt = document.getElementById("debug");
+            felt.innerHTML = "DEBUG:" + res;
+        }
+
+        var timerID = null;
+        var timerRunning = false;
+        var samme_person = null;
+        var pause = false;
+
+        function stopclock() {
+            if (timerRunning)
+                clearTimeout(timerID);
+            timerRunning = false;
+        }
+
+        function start_tid() {
+            pause = false;
+        }
+
+        function stop_tid() {
+            pause = true;
+        }
+
+
+        function tid(person) {
+            var now_talking = document.getElementById("now_talking");
+            //    now_talking_time = document.getElementById("now_talking");
+            var now_time = new Date();
+            var last_talking = document.getElementById("last_talking");
+            var last_talking_time = document.getElementById("last_talking_time");
+            var last_time = last_talking_time.value;
+            // tid[last_talking] += tid(now) - tid(last_talking)
+            var diff = (now_time.getTime() - last_time) / 1000;
+            if (diff > 100000) { diff = 1 }
+            if (pause) { diff = 0 }
+            debug(diff);
+            var p_time = document.getElementById(person);
+            var p_show = document.getElementById('' + person + '_show');
+            if (isNaN(parseFloat(p_time.value))) { p_time.value = 1; }
+            p_time.value = parseFloat(diff) + parseFloat(p_time.value);
+            p_show.value = Math.round(p_time.value);
+            var max_time = document.getElementById("max");
+            if (isNaN(parseFloat(max_time.value))) { max_time.value = 1; }
+            max_time.value = Math.max(p_time.value, max_time.value);
+
+            var total_time = document.getElementById("total");
+            if (isNaN(parseFloat(total_time.value))) { total_time.value = 1; }
+            total_time.value = parseFloat(diff) + parseFloat(total_time.value);
+
+            last_talking.value = now_talking.value;
+            now_talking.value = person;
+            last_talking_time.value = now_time.getTime();
+
+            samme_person = person;
+            stopclock();
+            timerID = setTimeout("tid_samme_person()", 1000);
+            timerRunning = true;
+            all_bars()
+        }
+
+        function all_bars() {
+            bar("person_1");
+            bar("person_2");
+            bar("person_3");
+            bar("person_4");
+            bar("person_5");
+            bar("person_6");
+            // bar("person_7");
+            // bar("person_8");
+            // bar("person_9");
+            // bar("person_10");
+        }
+
+        function bar(person) {
+            var p_time = document.getElementById(person);
+            if (isNaN(parseFloat(p_time.value))) { p_time.value = 0; }
+
+            var max_time = document.getElementById("max");
+            if (isNaN(parseFloat(max_time.value))) { max_time.value = 1; }
+
+            var percent = p_time.value / max_time.value;
+            var felt = document.getElementById("bar_" + person);
+            var color = percent > 0.70 ? (percent > 0.90 ? "error" : "warning") : "ok";
+
+            if (felt.innerHTML.includes("table")) {
+                td0 = felt.getElementsByTagName("td")[0]
+                td0.width = percent * 100 + "%";
+                td0.className = color;
+            } else {
+                felt.innerHTML = "<table border=0 width=100%><tr><td width=" + (percent * 100) + "% class='" + color + "'>" +
+                    "<img height=10>&nbsp;" +
+                    "<td width=" + (100) + "% bgcolor=#919283></tr></table>";
+            }
+            //felt.innerHTML = "<table border=0 width=100%><tr><td width="+(percent*100)+"% class='"+color+"'>"+
+            //"<img height=10>&nbsp;"+
+            //"<td width="+(100-percent*100)+"% bgcolor=#919283></tr></table>";
+        }
+
+        function tid_samme_person() {
+            tid(samme_person);
+        }
+
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.keyCode) {
+                //alert(evt.keyCode);
+                //32 = space
+                //49 = 1
+                //50 = 2 etc.
+                switch(evt.keyCode){
+                    case 32:
+                        stop_tid();
+                        break;
+                    case 49:
+                        start_tid();tid('person_1');
+                        break;
+                    case 50:
+                        start_tid();tid('person_2');
+                        break;
+                    case 51:
+                        start_tid();tid('person_3');
+                        break;
+                    case 52:
+                        start_tid();tid('person_4');
+                        break;
+                    case 53:
+                        start_tid();tid('person_5');
+                        break;
+                    case 54:
+                        start_tid();tid('person_6');
+                        break;
+                }
+            }
+        };
+
+    </script>
+    <span class="timetoggle" onclick="javascript:document.getElementById('timeboard').classList.toggle('hidden')">⏱</span>
+    <div class="row-container">
+        <div class="top-row">
+            <H1>PROSA x UCL - stil & stem på spørgsmål på valg.prosa.dk/va</H1>
+            <div class="timeboard" id="timeboard">
+                <div style="display: none">
+                    <span id="debug"></span>
+
+                    <input type="button" onclick="javascript:stop_tid()" name="stop" value="stop">
+
+                    <input type="button" onclick="javascript:start_tid()" name="start" value="start">
+                    Now: <input type="text" id="now_talking" /><br>
+                    Before: <input type="text" id="last_talking" /><br>
+                    last talking time: <input type="text" id="last_talking_time" /><br>
+                    <form name="form1" method="post" action="">
+
+                        Total: <input type="text" id="total" />
+                        Max: <input type="text" id="max" />
+                </div>
+
+                <table width="100%" border=0>
+                    <tr>
+                        <td><b>Taler</b></td>
+                        <td></td>
+                        <td><b>Taletid i % af længste taletid</b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#" onclick="start_tid();tid('person_1')">Anette Prang</a>
+                        </td>
+                        <td>
+                            <input type="hidden" id="person_1" value="tom" size="5" />
+                            <input type="text" id="person_1_show" value="0" size="5" />
+                        </td>
+                        <td width="100%"><span id="bar_person_1"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="#" onclick="start_tid();tid('person_2')">Carsten Bach</a>
+                        </td>
+                        <td>
+                            <input type="hidden" id="person_2" value="tom" size="5" />
+                            <input type="text" id="person_2_show" value="0" size="5" />
+                        </td>
+                        <td width="100%"><span id="bar_person_2"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="#" onclick="start_tid();tid('person_3')">Line Mørk</a>
+                        </td>
+                        <td>
+                            <input type="hidden" id="person_3" value="tom" size="5" />
+                            <input type="text" id="person_3_show" value="0" size="5" />
+                        </td>
+                        <td width="100%"><span id="bar_person_3"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="#" onclick="start_tid();tid('person_4')">Victoria Velásquez</a>
+                        </td>
+                        <td>
+                            <input type="hidden" id="person_4" value="tom" size="5" />
+                            <input type="text" id="person_4_show" value="0" size="5" />
+                        </td>
+                        <td width="100%"><span id="bar_person_4"></span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="#" onclick="start_tid();tid('person_5')">Kristian Guldfeldt</a>
+                        </td>
+                        <td>
+                            <input type="hidden" id="person_5" value="tom" size="5" />
+                            <input type="text" id="person_5_show" value="0" size="5" />
+                        </td>
+                        <td width="100%"><span id="bar_person_5"></span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <a href="#" onclick="start_tid();tid('person_6')">Line Gessø Hansen</a>
+                        </td>
+                        <td>
+                            <input type="hidden" id="person_6" value="tom" size="5" />
+                            <input type="text" id="person_6_show" value="0" size="5" />
+                        </td>
+                        <td width="100%"><span id="bar_person_6"></span>
+                        </td>
+                    </tr>
+
+                    <!--
+        <tr><td>
+        <a href="#" onclick="start_tid();tid('person_7')">Navn Navnsen</a>
+        </td><td>
+        <input type="hidden" id="person_7" value="tom" size="5"/>
+        <input type="text" id="person_7_show" value="0" size="5"/>
+        </td><td width="100%"><span id="bar_person_7"></span>
+        </td></tr>
+
+
+        <tr><td>
+        <a href="#" onclick="start_tid();tid('person_8')">Navn Navnsen</a>
+        </td><td>
+        <input type="hidden" id="person_8" value="tom" size="5"/>
+        <input type="text" id="person_8_show" value="0" size="5"/>
+        </td><td width="100%"><span id="bar_person_8"></span>
+        </td></tr>
+
+        <tr><td>
+        <a href="#" onclick="start_tid();tid('person_9')">Navn Navnsen</a>
+        </td><td>
+        <input type="hidden" id="person_9" value="tom" size="5"/>
+        <input type="text" id="person_9_show" value="0" size="5"/>
+        </td><td width="100%"><span id="bar_person_9"></span>
+        </td></tr>
+
+        <tr><td>
+        <a href="#" onclick="start_tid();tid('person_10')">Navn Navnsen</a>
+        </td><td>
+        <input type="hidden" id="person_10" value="tom" size="5"/>
+        <input type="text" id="person_10_show" value="0" size="5"/>
+        </td><td width="100%"><span id="bar_person_10"></span>
+        </td></tr>
+
+        -->
+
+
+                </table>
+                <a href="#" onclick="stop_tid();">Pause</a>
+            </div>
+        </div>
+        <iframe class="bottom-row" frameborder="none" src="va/?mode=novote&refresh=15&template=clean">
+        </iframe>
+    </div>
+    <script type="text/javascript">
+        all_bars();
+    </script>
+
+</body>
+
+</html>

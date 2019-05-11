@@ -1,39 +1,155 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/montserrat-v12-latin-regular.eot");
+    src: local("Montserrat Regular"), local("Montserrat-Regular"), url("fonts/montserrat-v12-latin-regular.eot?#iefix") format("embedded-opentype"), url("fonts/montserrat-v12-latin-regular.woff2") format("woff2"), url("fonts/montserrat-v12-latin-regular.woff") format("woff"), url("fonts/montserrat-v12-latin-regular.ttf") format("truetype"), url("fonts/montserrat-v12-latin-regular.svg#Montserrat") format("svg")
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    src: url("fonts/montserrat-v12-latin-500.eot");
+    src: local("Montserrat Medium"), local("Montserrat-Medium"), url("fonts/montserrat-v12-latin-500.eot?#iefix") format("embedded-opentype"), url("fonts/montserrat-v12-latin-500.woff2") format("woff2"), url("fonts/montserrat-v12-latin-500.woff") format("woff"), url("fonts/montserrat-v12-latin-500.ttf") format("truetype"), url("fonts/montserrat-v12-latin-500.svg#Montserrat") format("svg")
+}
 
 html {
-     font-family: verdana, sans-serif;
+    font-family: verdana, sans-serif;
 
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-     margin: 1em;
-     margin-left: 4em;
-     color: #ffffff;
-     color: #000000;
-
+    color: #ffffff;
 }
 
-
 .even {
-      background: #ffffff;
+    background: #ffffff;
 }
 
 .odd {
-     background: #eeeeee;
+    background: #eeeeee;
 }
 
-th {
-   text-align: left;
-   background: #aaaaaa;
+/* th {
+    text-align: left;
+    background: #aaaaaa;
+} */
+
+.hidden {
+    display: none;
 }
 
+span.timetoggle {
+    position: absolute;
+    font-size: 3rem;
+    padding: 0.4rem;
+    cursor: pointer;
+    user-select: none;
+}
 
-td.number, td.points {
-  padding-right: 0.7em;
-  text-align: right;
+td.number,
+td.points {
+    padding-right: 0.7em;
+    text-align: right;
+}
+
+.timeboard td {
+    transition: 1s all linear;
 }
 
 
 .error {
-  color: #FF0000;
-  font-weight: bold;
+    color: #FF0000;
+    font-weight: bold;
+}
+
+body {
+    background: #092b3f;
+    font-family: helvetica, sans-serif;
+    color: #EEE;
+}
+
+.time h1 {
+    background-color: #c52c1a;
+    margin: 0 -2rem;
+    padding: 1rem;
+    text-align: center;
+    font-family: Montserrat;
+}
+
+.timeboard {
+    padding: 1rem 0;
+}
+
+.clean table,
+.skabelon table {
+    color: #092b3f;
+}
+
+body.skabelon,
+body.question {
+    margin: 3rem;
+    
+}
+
+.clean td.question, .clean td.points {
+  font-size: 2rem;
+}
+
+a {
+    line-break: unset;
+    white-space: nowrap;
+    text-decoration: none;
+    font-weight: bold;
+    color: #EEE;
+}
+
+.row-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.top-row,
+.bottom-row {
+    margin: 0 2rem;
+}
+
+.bottom-row {
+    flex-grow: 1;
+    border: none;
+    padding: 0;
+}
+
+.ok {
+    background-color: #3F8584;
+}
+
+.warning {
+    background-color: #FC6543;
+}
+
+.error {
+    background-color: #c52c1a;
+}
+
+.clean .questiontable td {
+    padding: .5rem;
+}
+
+.clean .questiontable th {
+    text-align: left;
+    background-color: transparent;
+    color: #FFF;
+    font-size: 2rem;
+    font-family: Montserrat;
 }

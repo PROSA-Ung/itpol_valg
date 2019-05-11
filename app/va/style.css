@@ -82,6 +82,7 @@ body {
     padding: 1rem;
     text-align: center;
     font-family: Montserrat;
+    padding-left: 61px;
 }
 
 .timeboard {
@@ -96,7 +97,17 @@ body {
 body.skabelon,
 body.question {
     margin: 3rem;
-    
+}
+
+@media(max-width: 600px) {
+  body.skabelon,
+  body.question {
+    margin: 1rem;
+  }
+}
+
+textarea {
+  max-width: 100%;
 }
 
 .clean td.question, .clean td.points {
@@ -156,4 +167,32 @@ a {
 
 .admincell a {
   color: #092b3f;
+}
+
+button, .asklink, .close, input[type=submit] {
+  padding: 0;
+  border: none;
+  font: inherit;
+  font-weight: 500;
+  color: inherit;
+  background-color: transparent;
+  /* show a hand cursor on hover; some argue that we
+  should keep the default arrow cursor for buttons */
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+    /* create a small space when buttons wrap on 2 lines */
+    margin: 2px 0;
+
+    /* invisible border (will be colored on hover/focus) */
+    border: solid 1px transparent;
+    border-radius: 4px;
+  
+    /* size comes from text & padding (no width/height) */
+    padding: 0.5em 1em;
+  
+    /* make sure colors have enough contrast! */
+    color: #ffffff;
+    background-color: #3F8584;
 }

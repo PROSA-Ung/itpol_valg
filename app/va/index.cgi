@@ -260,6 +260,7 @@ $page .= qq|</table><br/>
             <form action="index.cgi" method="post" id="refreshform">
               <input type="hidden" name="uid" value="$uid"/>
               <input type="hidden" name="mode" value="$mode"/>
+			  <input type="hidden" name="template" value="clean"/>
               Opdater hvert <input type="text" name="refresh" value="$refresh" size="4"/> sekund (0 for ingen opdatering)<br/>
               <input type="submit" value="ok"/>
 	    </form>

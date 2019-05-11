@@ -13,7 +13,7 @@ use DBI;
 use HTML::Entities;
 
 my %admins = (
-	      1234 => 1,
+	      $ENV{'ADMIN_UID'} => 1,
 	      );
 
 

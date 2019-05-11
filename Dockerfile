@@ -19,5 +19,6 @@ ENV DB_HOST=web_db
 ENV DB_NAME=valg
 ENV DB_USER=valg
 ENV DB_PASS=secret
+ENV ADMIN_UID=1234
 
 ENTRYPOINT [ "/entrypoint.sh" ]

@@ -51,6 +51,20 @@ Options +ExecCgi
 
 to your Apache configuration - either in a .htaccess file or in the Apache site configuration.
 
+# Docker stuff
+Dependencies:
+* Docker
+* Dockerhub account (for pushing)
+* Docker-compose for testing locally
+
+## Test locally 
+run `docker-compose -f "docker-compose.yml" up -d --build` inside the root folder. it'll create a web container and a database, it will also mount the `app` directory inside the container so you can test code changes without rebuilding the container. The webapp is accessible on http://localhost:8080
+
+## Deploy
+Make sure you're logged into Dockerhub, and a part of the [PROSA UNG organization](https://hub.docker.com/u/prosaung). Then just run the `./push.sh` script from the root folder.
+
+We have a service setup that checks dockerhub every minute and if it finds a newer image it'll download and deploy it.
+
 License
 =======
 The meeting application (everything in the "va" directory) is licensed under the GNU General Public License v3.

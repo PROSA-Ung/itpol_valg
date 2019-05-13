@@ -87,9 +87,9 @@ This work is also licensed under GPLv3.
             bar("person_5");
             bar("person_6");
             bar("person_7");
-            // bar("person_8");
-            // bar("person_9");
-            // bar("person_10");
+            bar("person_8");
+            bar("person_9");
+            bar("person_10");
         }
 
         function bar(person) {
@@ -156,6 +156,12 @@ This work is also licensed under GPLv3.
                     case 56:
                         start_tid();tid('person_8');
                         break;
+                    case 57:
+                        start_tid();tid('person_9');
+                        break;
+                    case 48:
+                        start_tid();tid('person_10');
+                        break;
                 }
             }
         };
@@ -164,8 +170,8 @@ This work is also licensed under GPLv3.
     <span class="timetoggle" onclick="javascript:document.getElementById('timeboard').classList.toggle('hidden')">⏱</span>
     <div class="row-container">
         <div class="top-row">
-            <H1>PROSA x UCL - stil & stem på spørgsmål på valg.prosa.dk/va</H1>
-            <div class="timeboard" id="timeboard">
+            <H1>stil & stem på spørgsmål på valg.prosa.dk/va</H1>
+            <div class="timeboard hidden" id="timeboard">
                 <div style="display: none">
                     <span id="debug"></span>
 

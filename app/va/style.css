@@ -89,6 +89,8 @@ body {
     padding: 1rem 0;
 }
 
+
+
 .clean table,
 .skabelon table {
     color: #092b3f;
@@ -112,6 +114,18 @@ textarea {
 
 .clean td.question, .clean td.points {
   font-size: 2rem;
+}
+
+.speaker {
+  text-align: center;
+  position: absolute;
+  top: 54px;
+  width: 100%;
+  opacity: .5;
+}
+
+.timeboard td {
+  white-space: nowrap;
 }
 
 a {
@@ -169,7 +183,7 @@ a {
   color: #092b3f;
 }
 
-button, .asklink, .close, input[type=submit] {
+button, .asklink, .close, .button, input[type=submit] {
   padding: 0;
   border: none;
   font: inherit;

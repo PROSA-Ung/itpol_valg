@@ -40,10 +40,16 @@ This work is also licensed under GPLv3.
 
         function stop_tid() {
             pause = true;
+            document.getElementById("activeSpeaker").innerText = "ingen (pause)"
         }
 
 
         function tid(person) {
+            if (!pause) {
+                activeSpeaker = document.getElementById("activeSpeaker")
+                person_name = document.getElementById(person).parentElement.previousElementSibling.children[0].innerText;
+                activeSpeaker.innerText = person_name;
+            }
             var now_talking = document.getElementById("now_talking");
             //    now_talking_time = document.getElementById("now_talking");
             var now_time = new Date();
@@ -87,9 +93,9 @@ This work is also licensed under GPLv3.
             bar("person_5");
             bar("person_6");
             bar("person_7");
-            bar("person_8");
-            bar("person_9");
-            bar("person_10");
+            //bar("person_8");
+            //bar("person_9");
+            //bar("person_10");
         }
 
         function bar(person) {
@@ -112,9 +118,6 @@ This work is also licensed under GPLv3.
                     "<img height=10>&nbsp;" +
                     "<td width=" + (100) + "% bgcolor=#919283></tr></table>";
             }
-            //felt.innerHTML = "<table border=0 width=100%><tr><td width="+(percent*100)+"% class='"+color+"'>"+
-            //"<img height=10>&nbsp;"+
-            //"<td width="+(100-percent*100)+"% bgcolor=#919283></tr></table>";
         }
 
         function tid_samme_person() {
@@ -171,6 +174,7 @@ This work is also licensed under GPLv3.
     <div class="row-container">
         <div class="top-row">
             <H1>stil & stem på spørgsmål på valg.prosa.dk/va</H1>
+            <div class="speaker">Aktiv taler: <span id="activeSpeaker"></span></div>
             <div class="timeboard hidden" id="timeboard">
                 <div style="display: none">
                     <span id="debug"></span>
@@ -195,7 +199,7 @@ This work is also licensed under GPLv3.
                     </tr>
                     <tr>
                         <td>
-                            <a href="#" onclick="start_tid();tid('person_1')">Anette Prang</a>
+                            1 <a href="#" onclick="start_tid();tid('person_1')">Anette Prang</a>
                         </td>
                         <td>
                             <input type="hidden" id="person_1" value="tom" size="5" />
@@ -207,7 +211,7 @@ This work is also licensed under GPLv3.
 
                     <tr>
                         <td>
-                            <a href="#" onclick="start_tid();tid('person_2')">Carsten Bach</a>
+                            2 <a href="#" onclick="start_tid();tid('person_2')">Carsten Bach</a>
                         </td>
                         <td>
                             <input type="hidden" id="person_2" value="tom" size="5" />
@@ -219,7 +223,7 @@ This work is also licensed under GPLv3.
 
                     <tr>
                         <td>
-                            <a href="#" onclick="start_tid();tid('person_3')">Line Mørk</a>
+                            3 <a href="#" onclick="start_tid();tid('person_3')">Line Mørk</a>
                         </td>
                         <td>
                             <input type="hidden" id="person_3" value="tom" size="5" />
@@ -231,7 +235,7 @@ This work is also licensed under GPLv3.
 
                     <tr>
                         <td>
-                            <a href="#" onclick="start_tid();tid('person_4')">Victoria Velásquez</a>
+                            4 <a href="#" onclick="start_tid();tid('person_4')">Victoria Velásquez</a>
                         </td>
                         <td>
                             <input type="hidden" id="person_4" value="tom" size="5" />
@@ -243,7 +247,7 @@ This work is also licensed under GPLv3.
 
                     <tr>
                         <td>
-                            <a href="#" onclick="start_tid();tid('person_5')">Kristian Guldfeldt</a>
+                            5 <a href="#" onclick="start_tid();tid('person_5')">Kristian Guldfeldt</a>
                         </td>
                         <td>
                             <input type="hidden" id="person_5" value="tom" size="5" />
@@ -256,7 +260,7 @@ This work is also licensed under GPLv3.
 
                     <tr>
                         <td>
-                            <a href="#" onclick="start_tid();tid('person_6')">Line Gessø Hansen</a>
+                            6 <a href="#" onclick="start_tid();tid('person_6')">Line Gessø Hansen</a>
                         </td>
                         <td>
                             <input type="hidden" id="person_6" value="tom" size="5" />
@@ -268,7 +272,7 @@ This work is also licensed under GPLv3.
 
                     
         <tr><td>
-        <a href="#" onclick="start_tid();tid('person_7')">Margit Lund-Cramer</a>
+            7 <a href="#" onclick="start_tid();tid('person_7')">Margit Lund-Cramer</a>
         </td><td>
         <input type="hidden" id="person_7" value="tom" size="5"/>
         <input type="text" id="person_7_show" value="0" size="5"/>
@@ -277,7 +281,7 @@ This work is also licensed under GPLv3.
 
 <!--
         <tr><td>
-        <a href="#" onclick="start_tid();tid('person_8')">Navn Navnsen</a>
+        8 <a href="#" onclick="start_tid();tid('person_8')">Navn Navnsen</a>
         </td><td>
         <input type="hidden" id="person_8" value="tom" size="5"/>
         <input type="text" id="person_8_show" value="0" size="5"/>
@@ -285,7 +289,7 @@ This work is also licensed under GPLv3.
         </td></tr>
 
         <tr><td>
-        <a href="#" onclick="start_tid();tid('person_9')">Navn Navnsen</a>
+        9 <a href="#" onclick="start_tid();tid('person_9')">Navn Navnsen</a>
         </td><td>
         <input type="hidden" id="person_9" value="tom" size="5"/>
         <input type="text" id="person_9_show" value="0" size="5"/>
@@ -293,7 +297,7 @@ This work is also licensed under GPLv3.
         </td></tr>
 
         <tr><td>
-        <a href="#" onclick="start_tid();tid('person_10')">Navn Navnsen</a>
+        0 <a href="#" onclick="start_tid();tid('person_10')">Navn Navnsen</a>
         </td><td>
         <input type="hidden" id="person_10" value="tom" size="5"/>
         <input type="text" id="person_10_show" value="0" size="5"/>
@@ -304,7 +308,7 @@ This work is also licensed under GPLv3.
 
 
                 </table>
-                <a href="#" onclick="stop_tid();">Pause</a>
+                <a href="#" class="button" onclick="stop_tid();">Pause</a>
             </div>
         </div>
         <iframe class="bottom-row" frameborder="none" src="va/?mode=novote&refresh=15&template=clean">

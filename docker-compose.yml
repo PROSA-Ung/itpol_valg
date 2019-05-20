@@ -13,7 +13,7 @@ services:
     ports:
       - "8080:80"
     environment:
-      ADMIN_UID: 9837452398563
+      ADMIN_UID: 9837452
   db:
     container_name: web_db
     image: mariadb

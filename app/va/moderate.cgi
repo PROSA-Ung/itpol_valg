@@ -58,7 +58,7 @@ if ($isadmin){
 	
 	$dbh->do("UPDATE question SET edited = ? WHERE id = ?", undef, $q->param('moderated'), $qid);
 
-	$dbh->do("DELETE FROM votes WHERE question = ? AND uid = ?", undef, $qid, $uid);
+	$dbh->do("DELETE FROM votes WHERE question = ?", undef, $qid);
 	$dbh->do("INSERT INTO votes (question, uid, vote) VALUES (?,?,?)", undef, $qid, $uid, $q->param('point_adjust'));
 	
 	$page .= qq|<p class="good">ændringer gemt</p>|;
@@ -89,7 +89,7 @@ if ($isadmin){
 
 	
 	my $content = encode_entities($row->{edited} || $row->{content} || '');
-	my $mine = int ($row->{mine} || 0);
+	my $mine = int ($row->{total} || 0);
 
 
 	## Show form

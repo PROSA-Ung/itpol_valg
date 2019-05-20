@@ -52,6 +52,8 @@ span.timetoggle {
     padding: 0.4rem;
     cursor: pointer;
     user-select: none;
+    top: 0;
+    left: 0;
 }
 
 td.number,
@@ -83,6 +85,7 @@ body {
     text-align: center;
     font-family: Montserrat;
     padding-left: 61px;
+    position: relative;
 }
 
 .timeboard {
@@ -119,9 +122,10 @@ textarea {
 .speaker {
   text-align: center;
   position: absolute;
-  top: 54px;
+  bottom: 0px;
   width: 100%;
   opacity: .5;
+  font-size: 1rem;
 }
 
 .timeboard td {

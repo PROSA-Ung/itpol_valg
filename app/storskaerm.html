@@ -170,12 +170,14 @@ This work is also licensed under GPLv3.
         };
 
     </script>
-    <span class="timetoggle" onclick="javascript:document.getElementById('timeboard').classList.toggle('hidden')">⏱</span>
     <div class="row-container">
         <div class="top-row">
-            <H1>stil & stem på spørgsmål på valg.prosa.dk/va</H1>
+            <H1>stil & stem på spørgsmål på valg.prosa.dk/va
+                <div class="speaker">Aktiv taler: <span id="activeSpeaker"></span></div>
+                <span class="timetoggle" onclick="javascript:document.getElementById('timeboard').classList.toggle('hidden')">⏱</span>
+            </H1>
             <H1 id="notification" class="notification"><span onclick="javascript:document.getElementById('notification').classList.toggle('hidden')" id="closeNotification">X</span>Stream debatten live på <a href="https://prosa.dk/valg">prosa.dk/valg</a> &bull; Tweeter du billeder, så frigiv dem gerne under licensen (CC-By) med hashtag #itvalg</H1>
-            <div class="speaker">Aktiv taler: <span id="activeSpeaker"></span></div>
+            
             <div class="timeboard hidden" id="timeboard">
                 <div style="display: none">
                     <span id="debug"></span>
